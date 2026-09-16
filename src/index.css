@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-gray-800 bg-surface-50 dark:text-gray-100 dark:bg-surface-900;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    @apply bg-brand-500/30 text-brand-900 dark:text-white;
+  }
+}
+
+/* ── Custom Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.25);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.45);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(129, 140, 248, 0.3);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(129, 140, 248, 0.5);
+}
+
+/* ── Utility Components ───────────────────────────────────── */
+@layer components {
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glassmorphism card */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg;
+  }
+  .dark .glass {
+    @apply bg-gray-800/60 border-gray-700/30;
+  }
+
+  /* Sidebar gradient */
+  .sidebar-gradient {
+    background: linear-gradient(180deg, #1e1b4b 0%, #312e81 30%, #1e293b 100%);
+  }
+
+  /* Compose button gradient */
+  .btn-compose {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .btn-compose:hover {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Send button gradient */
+  .btn-send {
+    background: linear-gradient(135deg, #10b981, #059669);
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .btn-send:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Typing indicator */
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-brand-400;
+  }
+
+  /* Email row hover effect */
+  .email-row {
+    @apply transition-all duration-200 ease-out;
+  }
+  .email-row:hover {
+    @apply -translate-y-px;
+  }
+
+  /* AI message bubble */
+  .ai-bubble {
+    @apply relative;
+  }
+  .ai-bubble::before {
+    content: '';
+    @apply absolute -left-1 top-3 w-2 h-2 rotate-45;
+    @apply bg-brand-50 dark:bg-brand-950/50;
+  }
+}
+
+/* ── Modal Backdrop ───────────────────────────────────────── */
+.modal-backdrop {
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.45);
+}
+.dark .modal-backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* ── Focus Rings ──────────────────────────────────────────── */
+input:focus,
+textarea:focus {
+  @apply outline-none ring-2 ring-brand-500/40 border-brand-500;
+}
+
+/* ── Transitions ──────────────────────────────────────────── */
+* {
+  @apply transition-colors duration-200;
+}
