@@ -1,145 +1,165 @@
-# ✈️ MailPilot AI
+#  MailPilot AI
 
-**AI-Powered Mail Application** — A premium Gmail-inspired web client with an integrated AI assistant for drafting, summarizing, and managing emails.
+### AI-Powered Mail Application
 
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss)
+MailPilot AI is a modern email application built with React and Vite. It takes inspiration from Gmail and adds an AI assistant to help users draft replies, summarize emails, and manage their inbox.
 
----
+I built this project to explore how an email client works and how AI features can be integrated into a clean, user-friendly interface.
 
-## 🚀 Quick Start
+##  Getting Started
 
-```bash
-# 1. Navigate to the project
-cd mailpilot-ai
+### Prerequisites
 
-# 2. Install dependencies
-npm install
+Make sure you have Node.js and npm installed on your system.
 
-# 3. Start the dev server
-npm run dev
-```
+### Installation
 
-Open **http://localhost:5173** in your browser.
+1. Clone the repository:
 
----
+   ```bash
+   git clone https://github.com/pragadeeshr18-alt/MailPilot-AI.git
+   ```
 
-## ✨ Features
+2. Open the project folder:
 
-| Feature | Description |
-|---------|-------------|
-| **Inbox / Sent / Drafts / Starred / Trash** | Full folder navigation with unread counts |
-| **Email Reading Pane** | Click any email to view full content |
-| **Search** | Real-time search across sender, subject, and body |
-| **Compose with Confirmation** | Write emails → review → confirm before sending |
-| **Star & Read/Unread** | Toggle star and read status on any email |
-| **AI Assistant Panel** | Draft replies, summarize emails, revise tone |
-| **Dark Mode** | System-aware toggle with smooth transition |
-| **Responsive Layout** | Works on desktop, tablet, and mobile |
+   ```bash
+   cd MailPilot-AI/mailpilot-ai
+   ```
 
----
+3. Install the dependencies:
 
-## 🤖 AI Assistant
+   ```bash
+   npm install
+   ```
 
-The right-side AI panel supports these actions:
+4. Start the development server:
 
-- **📝 Draft Reply** — Generate a reply to the selected email
-- **📋 Summarize** — Get a concise summary of the email
-- **🎩 Formal Reply** — Draft a formal/professional response
-- **😊 Friendly Reply** — Draft a casual/friendly response
-- **Custom Requests** — Type any instruction (e.g., "Make it shorter", "Rewrite in bullet points")
-- **Apply to Compose** — One-click to move AI-drafted text into the compose modal
+   ```bash
+   npm run dev
+   ```
 
-### Safety: AI Never Sends Automatically
+5. Open the local URL shown in your terminal. By default:
 
-The AI assistant **only produces drafts**. It never sends email on the user's behalf. Every outgoing email requires:
+   ```text
+   http://localhost:5173
+   ```
 
-1. User reviews the content in the Compose modal
-2. User clicks "Send"
-3. A **confirmation dialog** appears with full preview
-4. User explicitly clicks "Confirm & Send"
+##  Features
 
----
+* **Email Management** — Navigate through Inbox, Sent, Drafts, Starred, and Trash.
+* **Email Reading** — Select an email to view its full content.
+* **Search** — Search emails by sender, subject, or message content.
+* **Compose Email** — Write and review emails before sending.
+* **Send Confirmation** — Review the complete email and confirm before sending.
+* **Star and Read Status** — Mark emails as starred, read, or unread.
+* **AI Assistant** — Draft replies, summarize messages, and change the tone of emails.
+* **Dark Mode** — Switch between light and dark themes.
+* **Responsive Design** — Designed to work across desktop, tablet, and mobile screens.
 
-## 🏗️ Architecture: Action Layer
+##  AI Assistant
 
-All email and AI operations are routed through a clean **action layer** designed for easy API replacement:
+The AI assistant is available in the right-side panel and provides tools to help with everyday email tasks.
 
-### `emailActions` (→ Phase 2: Gmail API)
+### What it can do
 
-| Action | Current | Phase 2 |
-|--------|---------|---------|
-| `search()` | Local filter | Gmail search API |
-| `markAsRead()` | Local state | Gmail modify labels |
-| `toggleStar()` | Local state | Gmail modify labels |
-| `sendEmail()` | Local state (after confirmation) | Gmail send API |
-| `saveDraft()` | Local state | Gmail drafts API |
-| `deleteEmail()` | Local state | Gmail trash endpoint |
+* Draft a reply to a selected email.
+* Summarize an email.
+* Create formal or friendly replies.
+* Rewrite existing text based on your instructions.
+* Apply an AI-generated draft to the compose window.
 
-### `aiActions` (→ Phase 2: Gemini / OpenAI)
+### Email Safety
 
-| Action | Current | Phase 2 |
-|--------|---------|---------|
-| `draftReply()` | Template-based simulation | AI API call |
-| `summarize()` | Metadata extraction | AI API call |
-| `revise()` | String transformation | AI API call |
-| `prepareSend()` | Returns draft object | AI API call + confirmation |
+MailPilot AI is designed around user control. The assistant prepares email content but does not send emails automatically.
 
----
+Before an email is sent:
 
-## 📋 Phase 2 Roadmap
+1. The user writes or generates the email.
+2. The email is reviewed in the compose window.
+3. The user clicks Send.
+4. A confirmation dialog displays the email preview.
+5. The user explicitly confirms the send action.
 
-> **Real AI and Gmail OAuth are planned for Phase 2.**
+##  Tech Stack
 
-### Planned Integrations
+* **React 18** — Building the user interface.
+* **Vite** — Development server and build tool.
+* **Tailwind CSS** — Styling and responsive layouts.
+* **JavaScript** — Application logic and interactions.
+* **HTML & CSS** — Structure and custom styling.
 
-- **Gmail OAuth 2.0** — Real inbox sync via Gmail API
-- **Gemini / OpenAI API** — Replace simulated AI with real LLM responses
-- **Real-time sync** — Push notifications for new emails
-- **Attachment support** — File uploads and inline images
-- **Labels & filters** — Custom organization and auto-sorting
-- **Multi-account** — Support for multiple email accounts
+##  How the Project Works
 
-### Migration Path
+The application uses an action layer to keep email operations separate from the UI.
 
-1. Replace `emailActions` function bodies with Gmail API calls
-2. Replace `aiActions` function bodies with LLM API calls
-3. Add OAuth flow and token management
-4. Add environment variables for API keys
-5. The UI and confirmation flows remain unchanged
+Currently, email operations work with local application data, and the AI assistant uses simulated responses. This makes it possible to develop and test the interface before connecting real services.
 
----
+### Email Actions
 
-## 📁 Project Structure
+The email action layer handles:
 
-```
+* Searching emails.
+* Marking emails as read or unread.
+* Star and unstar actions.
+* Saving drafts.
+* Sending emails after confirmation.
+* Deleting emails.
+
+### AI Actions
+
+The AI action layer handles:
+
+* Drafting replies.
+* Summarizing emails.
+* Revising email content.
+* Preparing drafts for the compose window.
+
+This structure makes it easier to replace the current logic with real APIs in the future.
+
+##  Project Structure
+
+```text
 mailpilot-ai/
-├── public/                  # Static assets
+├── public/
 ├── src/
-│   ├── App.jsx              # All components + action layers
-│   ├── index.css            # Tailwind + custom styles
-│   └── main.jsx             # React entry point
-├── index.html               # HTML entry
-├── package.json             # Dependencies & scripts
-├── vite.config.js           # Vite configuration
-├── tailwind.config.js       # Tailwind theme & animations
-├── postcss.config.js        # PostCSS plugins
-└── README.md                # This file
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
 ```
 
+##  Available Scripts
+
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the development server         |
+| `npm run build`   | Build the application for production |
+| `npm run preview` | Preview the production build         |
+
+##  Future Improvements
+
+Some features I plan to explore in future versions:
+
+* Gmail API integration with OAuth 2.0.
+* Real AI responses using Gemini or OpenAI.
+* Real-time email synchronization.
+* File attachments and inline images.
+* Custom labels and email filters.
+* Support for multiple email accounts.
+
+##  Current Status
+
+This is a frontend project with simulated email and AI functionality. The main focus is on the user interface, email workflow, and the foundation for future API integrations.
+
+##  License
+
+This project is licensed under the MIT License.
+
 ---
 
-## 🛠️ Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server at localhost:5173 |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-
----
-
-## 📄 License
-
-MIT
+**Built with React, Vite, and Tailwind CSS.**
